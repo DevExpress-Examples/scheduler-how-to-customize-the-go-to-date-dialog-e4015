@@ -1,0 +1,26 @@
+@using Scheduler.CustomizationGotoDateForm.ExtensionHelpers
+ 
+@Html.DevExpress().Scheduler(
+    settings => {
+        settings.Name = "scheduler";
+        settings.CallbackRouteValues = new { Controller = "Scheduler", Action = "SchedulerPartial" };
+        settings.EditAppointmentRouteValues = new { Controller = "Scheduler", Action = "EditAppointmentAction" };
+        settings.Width = 800;
+        settings.Start = new DateTime(2012, 05, 14);
+        settings.Views.DayView.Styles.ScrollAreaHeight = 300;
+        settings.ClientSideEvents.BeginCallback = "OnSchedulerBeginCallback";
+
+        settings.BeforeExecuteCallbackCommand = (sender, e) => {
+            if(e.CommandId == SchedulerCallbackCommandId.GotoDateForm)
+                e.Command = new MVCxSchedulerGotoDateFormCallbackCommand((MVCxScheduler)sender);
+        };
+        settings.OptionsForms.SetGotoDateFormTemplateContent(c => {
+            Html.DevExpress().Calendar(calendarSettings => {
+                calendarSettings.Name = "calendar";
+                calendarSettings.Properties.ClientSideEvents.SelectionChanged = "OnCalendarSelectionChanged";
+                calendarSettings.Properties.ShowClearButton = false;
+            }).Bind(c.Date).Render();
+        });
+        settings.Storage.Appointments.Assign(SchedulerHelper.AppointmentStorage);
+        settings.Storage.Resources.Assign(SchedulerHelper.ResourceStorage);
+    }).Bind(Model.Appointments, Model.Resources).GetHtml()
