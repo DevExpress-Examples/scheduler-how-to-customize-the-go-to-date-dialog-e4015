@@ -1,0 +1,25 @@
+@model SchedulerDataObject
+           
+@{
+    ViewBag.Title = "Scheduler";
+}
+
+<script type="text/javascript">
+    var gotoDateCallback = false;
+
+    function OnCalendarSelectionChanged(s, e){
+        gotoDateCallback = true;
+        scheduler.GoToDateFormApply();
+    }
+    function OnSchedulerBeginCallback(s, e){
+        if(gotoDateCallback){
+            e.customArgs["NewDate"] = calendar.GetValueString();
+            gotoDateCallback = false;
+        }
+    }
+</script>
+
+<h2>Scheduler</h2>
+
+@Html.Partial("SchedulerPartial", Model)
+
