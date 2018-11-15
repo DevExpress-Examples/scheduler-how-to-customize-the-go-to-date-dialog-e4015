@@ -1,3 +1,12 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [SchedulerController.cs](./CS/Scheduler.CustomizationGotoDateForm/Controller/SchedulerController.cs)
+* [SchedulerExtensionHelper.cs](./CS/Scheduler.CustomizationGotoDateForm/ExtensionHelpers/SchedulerExtensionHelper.cs)
+* [SchedulingDataClasses.cs](./CS/Scheduler.CustomizationGotoDateForm/Models/SchedulingDataClasses.cs)
+* [Scheduler.cshtml](./CS/Scheduler.CustomizationGotoDateForm/Views/Scheduler/Scheduler.cshtml)
+* [SchedulerPartial.cshtml](./CS/Scheduler.CustomizationGotoDateForm/Views/Scheduler/SchedulerPartial.cshtml)
+<!-- default file list end -->
 # Scheduler - How to customize the Go to Date dialog
 
 
